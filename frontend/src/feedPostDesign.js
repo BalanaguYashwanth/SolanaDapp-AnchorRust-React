@@ -2,21 +2,21 @@ import { useState } from "react";
 import loader from './assets/loader-unscreen.gif'
 import { Body } from "./Body";
 
-export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,Loading}) =>{
+export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,Loading}) =>{ //mainly UI design functionality goes here👇
     const [postText, setPostText] = useState('')
     const [hastagText, setHastagText] = useState('')
     const [limit, setLimit] = useState(10)
 
-    async function submit(){
+    async function submit(){ //calling post request
       if(postText && hastagText && posts.length)
       {
         await createPostFunction(postText,hastagText,posts.length)
-        setHastagText('')
-        setPostText('')
+        setHastagText('') //once post request is done, making the user inputs data clear
+        setPostText('') //once post request is done, making the user inputs data clear
       }
     }
 
-    function increase(){
+    function increase(){ //pagination
       setLimit(limit+10)
     }
 
@@ -54,13 +54,15 @@ export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,L
               </div>
             </div> :  <div className="connectWalletStyle"> 
                 
-                {connect()}
+                {/* connect to phantom */}
+                {connect()} 
               
               </div>
                }
           </div>
           <div>
-            { !Loading && posts.length>0 &&
+            {/* get the data from the get request */}
+            { !Loading && posts.length>0 &&   
               posts.slice(0,limit).map((post, index) => (
                <Body index={index} key={index} post={post} />
               ))}
@@ -68,7 +70,7 @@ export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,L
         </div>
         { Loading && 
         <div className="center">
-          <img  src={loader} />
+          <img  src={loader} />  {/* loader */}
           </div>
         }
         <div className="center">

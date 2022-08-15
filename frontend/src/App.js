@@ -17,7 +17,6 @@ const opts = {
 }
 const feedPostApp = Keypair.generate();
 const connection = new Connection(network, opts.preflightCommitment);
-const connection1 = new Connection(network, 'confirmed');
 
 
 const App = () => {
@@ -68,7 +67,7 @@ const App = () => {
     getPosts();
   };
 
-  const connectWalletRenderPopup = async () => {
+  const connectWalletRenderPopup = async () => { //first time users are connecting to wallet this function will activate
     try{
       setLoading(true)
       if (solana) {
@@ -88,18 +87,19 @@ const App = () => {
     );
   };
 
-  const createPostFunction = async(text,hastag,position) =>{
-    const provider = getProvider()
-    const program = new Program(idl,programID,provider)
-    const num = new anchor.BN(position);
+  const createPostFunction = async(text,hastag,position) =>{ //createPostFunction connects to the smartcontract via rpc and lib.json  to create post
+    const provider = getProvider() //checks & verify the dapp it can able to connect solana network
+    const program = new Program(idl,programID,provider) //program will communicate to solana network via rpc using lib.json as model
+    const num = new anchor.BN(position); //to pass number into the smartcontract need to convert into binary
     try{
-      const tx = await program.rpc.createPost(text,hastag,num,false,{
+      //post request will verify the lib.json and using metadata address it will verify the programID and create the block in solana
+      const tx = await program.rpc.createPost(text,hastag,num,false,{ 
         accounts:{
           feedPostApp:feedPostApp.publicKey,
           user: provider.wallet.publicKey,
           systemProgram: SystemProgram.programId,
         },
-        signers:[feedPostApp]
+        signers:[feedPostApp] 
       })
       //const account_data  = await program.account.feedPostApp.fetch(feedPostApp.publicKey)
       //console.log('user_data',user_data,'tx',tx,'feedpostapp',feedPostApp.publicKey.toString(),'user',provider.wallet.publicKey.toString(),'systemProgram',SystemProgram.programId.toString())
@@ -115,7 +115,7 @@ const App = () => {
     try{
       setLoading(true)
       Promise.all(
-        ((await connection1.getProgramAccounts(programID)).map(async(tx,index)=>(
+        ((await connection.getProgramAccounts(programID)).map(async(tx,index)=>( //no need to write smartcontract to get the data, just pulling all transaction respective programID and showing to user
           {
           ...(await program.account.feedPostApp.fetch(tx.pubkey)),
             pubkey:tx.pubkey.toString(),
