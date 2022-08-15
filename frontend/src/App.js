@@ -2,7 +2,7 @@ import './App.css';
 import {useEffect, useState} from 'react'
 import * as anchor from "@project-serum/anchor";
 import {Buffer} from 'buffer';
-import idl from './idl.json'
+import idl from './idl.json' //get the smartcontract data structure model from target folder in anchor rust
 import { Connection, PublicKey, clusterApiUrl  } from '@solana/web3.js';
 import { Program, AnchorProvider, web3, utils } from '@project-serum/anchor';
 import { FeedPostDesign } from './feedPostDesign';

@@ -13,6 +13,8 @@ export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,L
         await createPostFunction(postText,hastagText,posts.length)
         setHastagText('') //once post request is done, making the user inputs data clear
         setPostText('') //once post request is done, making the user inputs data clear
+      }else{
+        alert('Please enter all inputs')
       }
     }
 
@@ -45,7 +47,7 @@ export const FeedPostDesign = ({posts,createPostFunction,walletaddress,connect,L
                   value={hastagText}
                   onChange={(e) => setHastagText(e.target.value)}
                   rows={1}
-                  placeholder="#hastag"
+                  placeholder="#️⃣ or 🔗"
                   className="hastagInputStyles"
                 />
                 <button className="buttonStyle" onClick={submit}>
