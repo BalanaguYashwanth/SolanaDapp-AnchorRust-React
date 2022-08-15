@@ -1,0 +1,124 @@
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App {
+  height: 100vh;
+  background-color: rgb(20, 20, 20);
+  overflow: hidden;
+  color:white
+}
+
+.inputStyles{
+  margin: 0px 3px 10px 1px;
+  background-color:rgb(20, 20, 20);
+  border: none;
+  border-radius: 10px;
+  padding:20px 0px;
+  outline:none;
+  color: white;
+  resize: none;
+  outline: none;
+  width: 100%;
+}
+
+.hastagInputStyles{
+  margin: 0px 3px 10px 1px;
+  background-color:rgb(62, 62, 62);
+  border-radius: 10px;
+  padding:5px 10px;
+  outline:none;
+  color: white;
+  resize: none;
+  outline: none;
+}
+
+.secondaryInputBoxStyles{
+  display:flex;
+  justify-content:space-between;
+  margin:0px 20px 0px 0px;
+}
+
+.buttonStyle{
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  color: white;
+  background-color:rgb(29, 155, 240);
+}
+
+.loadbuttonStyle{
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  color: white;
+  margin: 10px;
+  background-color:grey;
+  background-color:rgb(62, 62, 62);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.scrollStyle{
+  overflow: scroll;
+  max-height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.bodyStyle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  margin: auto;
+}
+
+.borderStyle{
+  border: 1px solid grey;
+   padding: 10px
+}
+
+.inputStyle{
+ display: flex;
+ justify-content: space-around
+}
+
+.connectWalletStyle{
+  display:flex;
+  justify-content:center;
+  margin:20px 0px;
+}
+
+.center{
+  display:flex;
+  justify-content:center;
+}
