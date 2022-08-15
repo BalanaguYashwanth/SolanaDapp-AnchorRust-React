@@ -58,13 +58,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("load", onLoad);
-    return () => window.removeEventListener("load", onLoad);
+    try{
+      setLoading(true)
+      window.addEventListener("load", onLoad);
+      return () => window.removeEventListener("load", onLoad);
+    }catch(err){
+      console.log(err.message)
+    }finally{
+      setLoading(false)
+    }
   }, []);
 
-  const onLoad = () => {
-    checkIfWalletIsConnected();
-    getPosts();
+  const onLoad = async() => {
+    await checkIfWalletIsConnected();
+    await getPosts();
   };
 
   const connectWalletRenderPopup = async () => { //first time users are connecting to wallet this function will activate
