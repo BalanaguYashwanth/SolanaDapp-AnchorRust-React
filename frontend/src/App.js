@@ -82,7 +82,7 @@ const App = () => {
         setWalletAddress(response.publicKey.toString());
       }
     }catch(err){
-      console.log(err)
+      console.log(err.message)
     }finally{
       setLoading(false)
     }
@@ -100,6 +100,7 @@ const App = () => {
     const num = new anchor.BN(position); //to pass number into the smartcontract need to convert into binary
     try{
       //post request will verify the lib.json and using metadata address it will verify the programID and create the block in solana
+      setLoading(true)
       const tx = await program.rpc.createPost(text,hastag,num,false,{ 
         accounts:{
           feedPostApp:feedPostApp.publicKey,
@@ -112,7 +113,9 @@ const App = () => {
       //console.log('user_data',user_data,'tx',tx,'feedpostapp',feedPostApp.publicKey.toString(),'user',provider.wallet.publicKey.toString(),'systemProgram',SystemProgram.programId.toString())
       onLoad();
     }catch(err){
-      console.log(err)
+      console.log(err.message)
+    }finally{
+      setLoading(false)
     }
   }
 
@@ -121,7 +124,7 @@ const App = () => {
     const program = new Program(idl,programID,provider)
     try{
       setLoading(true)
-      Promise.all(
+      await Promise.all(
         ((await connection.getProgramAccounts(programID)).map(async(tx,index)=>( //no need to write smartcontract to get the data, just pulling all transaction respective programID and showing to user
           {
           ...(await program.account.feedPostApp.fetch(tx.pubkey)),
@@ -133,7 +136,7 @@ const App = () => {
       setData([...result])
     })
     }catch(err){
-      console.log(err)
+      console.log(err.message)
     }finally{
       setLoading(false)
     }
